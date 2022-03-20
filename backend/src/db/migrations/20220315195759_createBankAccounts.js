@@ -5,10 +5,12 @@
 exports.up = function (knex) {
   return knex.schema.createTable("bank_accounts", (table) => {
     table.increments("account_ID").primary();
+    table.string("account_name");
     table
-      .foreign("customer_ID")
-      .references("customers.customer_ID")
-      .deferrable("deferred");
+      .integer("customer_ID")
+      .references("customer_ID")
+      .inTable("customers")
+      .onDelete("CASCADE");
     table.timestamps(true, true);
   });
 };

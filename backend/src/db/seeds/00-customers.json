@@ -1,0 +1,26 @@
+[
+  {
+    "fname": "Rick",
+    "lname": "Sanchez",
+    "username": "RickSanchez",
+    "password": "WubbaLubbaDubDub123"
+  },
+  {
+    "fname": "Frank",
+    "lname": "Gallahger",
+    "username": "FrankIhateMyKids",
+    "password": "FionaGallahger"
+  },
+  {
+    "fname": "Tony",
+    "lname": "Wiseman",
+    "username": "tonyWiseman",
+    "password": "1234abc"
+  },
+  {
+    "fname": "Jason",
+    "lname": "Williams",
+    "username": "jwilliams97",
+    "password": "9999bbb"
+  }
+]
