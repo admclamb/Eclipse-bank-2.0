@@ -12,7 +12,8 @@ export async function readCustomer(username) {
 }
 
 export async function createCustomer(data) {
-  return axios.post("/customers", { data });
+  console.log(API_BASE_URL);
+  return axios.post(`${API_BASE_URL}/customers`, { data });
 }
 
 export async function getCustomer(username) {}

@@ -42,3 +42,13 @@ a {
 .text-sm {
   font-size: 1rem;
 }
+
+.text-container-50 {
+  max-width: 50%;
+}
+
+@media all and (max-width: 768px) {
+  .text-container-50 {
+    max-width: 90%;
+  }
+}

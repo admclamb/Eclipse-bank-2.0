@@ -24,6 +24,7 @@ function hasValidProperties(req, res, next) {
       message: `Invalid field(s): ${invalidProperties.join(", ")}`,
     });
   }
+  next();
 }
 
 // Rather than get using customer_ID, this will get using username
@@ -49,7 +50,12 @@ async function create(req, res, next) {
   res.status(201).json({ data: createdCustomer });
 }
 
+async function list(req, res, next) {
+  res.status(201).json({ data: await service.list() });
+}
+
 module.exports = {
+  list,
   read: [asyncErrorBoundary(customerExists), asyncErrorBoundary(read)],
   create: [
     hasValidProperties,

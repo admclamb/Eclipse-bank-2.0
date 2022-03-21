@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { createCustomer } from "../../utils/api";
 
 const Signup = () => {
   const initSignupInfo = {
@@ -21,18 +22,22 @@ const Signup = () => {
     });
   };
 
-  const onSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const response = await createCustomer({ data: signupInfo });
+    console.log(response);
+    setSignupInfo(initSignupInfo);
+    setConfirmPassword("");
   };
   console.log(signupInfo, confirmPassword);
   return (
     <div className="login d-flex flex-column align-items-center">
       <h2 className="mt-5">Eclipse Bank</h2>
       <p className="text-muted mb-5">CUSTOMER SIGN UP</p>
-      <form className="form row g-3 border p-4">
+      <form className="form row g-3 border p-4" onSubmit={handleSubmit} id="signup-form">
         <div className="col-12">
           <div className="row">
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-6 mb-3">
               <label htmlFor="username" className="form-label">
                 First Name
               </label>
@@ -45,7 +50,7 @@ const Signup = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-6 mb-3">
               <label htmlFor="username" className="form-label">
                 Last Name
               </label>
@@ -60,7 +65,7 @@ const Signup = () => {
             </div>
           </div>
 
-          <div className="col-12">
+          <div className="col-12 mb-3">
             <label htmlFor="username" className="form-label">
               Email
             </label>
@@ -85,7 +90,7 @@ const Signup = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="col-12">
+        <div className="col-12 mb-3">
           <label htmlFor="password" className="form-label">
             Password
           </label>
@@ -93,11 +98,12 @@ const Signup = () => {
             className="form-control"
             id="password"
             type="password"
+            placeholder="Password"
             value={signupInfo.password}
             onChange={handleChange}
           />
         </div>
-        <div className="col-12">
+        <div className="col-12 mb-3">
           <label htmlFor="password" className="form-label">
             Confirm Password
           </label>
@@ -107,6 +113,7 @@ const Signup = () => {
             type="password"
             value={confirmPassword}
             onChange={({ target }) => setConfirmPassword(target.value)}
+            placeholder="Confirm this password!"
           />
         </div>
 
@@ -117,7 +124,9 @@ const Signup = () => {
           </div>
         </div>
         <div className="col-12 d-grid gap-2">
-          <button className="login btn btn-lg btn-success">Login</button>
+          <button className="login btn btn-lg btn-success" form="signup-form">
+            Signup
+          </button>
         </div>
         <div>
           <span className="text-sm me-2">Have an account?</span>

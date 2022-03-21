@@ -1,0 +1,10 @@
+.hero {
+  height: 60vh;
+}
+
+.hero--container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
