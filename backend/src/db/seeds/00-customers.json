@@ -1,26 +1,30 @@
 [
   {
-    "fname": "Rick",
-    "lname": "Sanchez",
+    "first_name": "Rick",
+    "last_name": "Sanchez",
     "username": "RickSanchez",
+    "email": "rickSanchez@gmail.com",
     "password": "WubbaLubbaDubDub123"
   },
   {
-    "fname": "Frank",
-    "lname": "Gallahger",
+    "first_name": "Frank",
+    "last_name": "Gallahger",
     "username": "FrankIhateMyKids",
+    "email": "frankGallagher@gmail.com",
     "password": "FionaGallahger"
   },
   {
-    "fname": "Tony",
-    "lname": "Wiseman",
+    "first_name": "Tony",
+    "last_name": "Wiseman",
+    "email": "tonyWiseman@gmail.com",
     "username": "tonyWiseman",
     "password": "1234abc"
   },
   {
-    "fname": "Jason",
-    "lname": "Williams",
+    "first_name": "Jason",
+    "last_name": "Williams",
     "username": "jwilliams97",
+    "email": "jwilliams97@gmail.com",
     "password": "9999bbb"
   }
 ]

@@ -1,22 +1,62 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { readCustomer } from "../../utils/api";
 
 const Login = () => {
+  const [user, setUser] = useState({});
+  console.log(setUser);
+  const initLogin = {
+    username: "",
+    password: ""
+  };
+  const [login, setLogin] = useState(initLogin);
+
+  const handleChange = ({ target }) => {
+    const { id } = target;
+    setLogin({
+      ...user,
+      [id]: target.value
+    });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await readCustomer(login.username);
+    } catch (error) {
+      console.log(error);
+    }
+    setLogin(initLogin);
+    return;
+  };
   return (
     <div className="login d-flex flex-column align-items-center">
       <h2 className="mt-5">Eclipse Bank</h2>
       <p className="text-muted mb-5">CUSTOMER LOG IN</p>
-      <form className="form row g-3 border p-4">
+      <form className="form row g-3 border p-4" onSubmit={handleSubmit} id="login-form">
         <div className="col-12">
           <label htmlFor="username" className="form-label">
             Username
           </label>
-          <input className="form-control" id="username" type="text" />
+          <input
+            className="form-control"
+            id="username"
+            type="text"
+            value={login.username}
+            onChange={handleChange}
+          />
         </div>
         <div className="col-12">
           <label htmlFor="password" className="form-label">
             Password
           </label>
-          <input className="form-control" id="password" type="password" />
+          <input
+            className="form-control"
+            id="password"
+            type="password"
+            value={login.password}
+            onChange={handleChange}
+          />
         </div>
 
         <div className="col-12">
@@ -26,7 +66,13 @@ const Login = () => {
           </div>
         </div>
         <div className="col-12 d-grid gap-2">
-          <button className="login btn btn-lg btn-success">Login</button>
+          <button
+            className="login btn btn-lg btn-success"
+            type="submit"
+            form="login-form"
+            value="Submit">
+            Login
+          </button>
         </div>
         <div>
           <span className="text-sm me-2">Don&apos;t have an account?</span>
