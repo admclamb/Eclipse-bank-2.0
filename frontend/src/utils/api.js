@@ -12,8 +12,14 @@ const CONFIG = {
 const headers = new Headers();
 headers.append("Content-Type", "application/json");
 
-export async function readCustomer(username) {
-  return;
+export async function readCustomer(data) {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/customers`, data, CONFIG);
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
 export async function createCustomer(data) {

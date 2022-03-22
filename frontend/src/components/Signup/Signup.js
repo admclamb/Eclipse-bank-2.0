@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { createCustomer } from "../../utils/api";
 import ErrorAlert from "../errors/ErrorAlert";
 
-const Signup = () => {
+const Signup = ({ setUser }) => {
   const initSignupInfo = {
     first_name: "",
     last_name: "",
@@ -32,7 +32,7 @@ const Signup = () => {
     }
     try {
       const response = await createCustomer({ data: signupInfo });
-      console.log(response);
+      setUser(response);
       setSignupInfo(initSignupInfo);
       setConfirmPassword("");
     } catch (error) {

@@ -1,16 +1,14 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { readCustomer } from "../../utils/api";
 
-const Login = () => {
-  const [user, setUser] = useState({});
-  console.log(setUser);
+const Login = ({ user, setUser }) => {
   const initLogin = {
     username: "",
     password: ""
   };
   const [login, setLogin] = useState(initLogin);
-
+  const [loginError, setLoginError] = useState({});
   const handleChange = ({ target }) => {
     const { id } = target;
     setLogin({
@@ -22,9 +20,9 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await readCustomer(login.username);
+      const response = await readCustomer({ data: login });
     } catch (error) {
-      console.log(error);
+      setLoginError(error);
     }
     setLogin(initLogin);
     return;
