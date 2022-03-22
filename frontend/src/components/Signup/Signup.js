@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createCustomer } from "../../utils/api";
+import ErrorAlert from "../errors/ErrorAlert";
 
 const Signup = () => {
   const initSignupInfo = {
@@ -13,7 +14,7 @@ const Signup = () => {
 
   const [signupInfo, setSignupInfo] = useState(initSignupInfo);
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [signupError, setSignupError] = useState({});
   const handleChange = ({ target }) => {
     const { id } = target;
     setSignupInfo({
@@ -23,18 +24,30 @@ const Signup = () => {
   };
 
   const handleSubmit = async (event) => {
+    setSignupError({});
     event.preventDefault();
-    const response = await createCustomer({ data: signupInfo });
-    console.log(response);
-    setSignupInfo(initSignupInfo);
-    setConfirmPassword("");
+    if (signupInfo.password !== confirmPassword) {
+      setSignupError({ message: "Passwords are not matching" });
+      return;
+    }
+    try {
+      const response = await createCustomer({ data: signupInfo });
+      console.log(response);
+      setSignupInfo(initSignupInfo);
+      setConfirmPassword("");
+    } catch (error) {
+      setSignupError(error);
+    }
   };
-  console.log(signupInfo, confirmPassword);
   return (
     <div className="login d-flex flex-column align-items-center">
       <h2 className="mt-5">Eclipse Bank</h2>
       <p className="text-muted mb-5">CUSTOMER SIGN UP</p>
+
       <form className="form row g-3 border p-4" onSubmit={handleSubmit} id="signup-form">
+        <div className="col-12">
+          <ErrorAlert error={signupError} />
+        </div>
         <div className="col-12">
           <div className="row">
             <div className="col-12 col-md-6 mb-3">

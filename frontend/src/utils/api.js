@@ -17,8 +17,20 @@ export async function readCustomer(username) {
 }
 
 export async function createCustomer(data) {
-  console.log(API_BASE_URL);
-  return axios.post(`${API_BASE_URL}/customers`, data, CONFIG);
+  try {
+    const response = await axios.post(`${API_BASE_URL}/customers`, data, CONFIG);
+    if (response.status === 204) {
+      return null;
+    }
+
+    const payload = await response.json();
+    return payload;
+  } catch (error) {
+    if (error.name !== "AbortError") {
+      console.error(error.stack);
+      throw error;
+    }
+  }
 }
 
 export async function getCustomer(username) {}
