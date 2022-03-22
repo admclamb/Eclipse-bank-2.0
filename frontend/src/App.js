@@ -19,7 +19,7 @@ function App() {
         <Navbar />
       </header>
       <main>
-        <Routes />
+        <Routes user={user} />
       </main>
     </>
   );

@@ -1,32 +1,33 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { readCustomer } from "../../utils/api";
 
 const Login = ({ user, setUser }) => {
-  const initLogin = {
-    username: "",
-    password: ""
-  };
-  const [login, setLogin] = useState(initLogin);
+  const history = useHistory();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState({});
   const handleChange = ({ target }) => {
     const { id } = target;
-    setLogin({
-      ...user,
-      [id]: target.value
-    });
+    id === "username" ? setUsername(target.value) : setPassword(target.value);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(username, password);
     try {
-      const response = await readCustomer({ data: login });
+      const response = await readCustomer({ data: { username, password } });
+      setUser(response.data);
+      history.push("/");
     } catch (error) {
       setLoginError(error);
     }
-    setLogin(initLogin);
+    setUsername("");
+    setPassword("");
     return;
   };
+  console.log(username, password);
   return (
     <div className="login d-flex flex-column align-items-center">
       <h2 className="mt-5">Eclipse Bank</h2>
@@ -40,7 +41,7 @@ const Login = ({ user, setUser }) => {
             className="form-control"
             id="username"
             type="text"
-            value={login.username}
+            value={username}
             onChange={handleChange}
           />
         </div>
@@ -52,7 +53,7 @@ const Login = ({ user, setUser }) => {
             className="form-control"
             id="password"
             type="password"
-            value={login.password}
+            value={password}
             onChange={handleChange}
           />
         </div>

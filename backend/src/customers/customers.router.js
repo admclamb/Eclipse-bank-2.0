@@ -10,6 +10,6 @@ router
   .post(controller.create)
   .all(methodNotAllowed);
 
-router.route("/login").get(controller.login).all(methodNotAllowed);
+router.route("/login").post(controller.login).all(methodNotAllowed);
 
 module.exports = router;

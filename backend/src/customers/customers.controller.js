@@ -97,6 +97,7 @@ async function read(req, res, next) {
 async function readLogin(req, res, next) {
   // If data has a password property, it will check if password matches existing customer
   const { customer } = res.locals;
+  console.log(customer);
   res.status(201).json({ data: customer });
 }
 

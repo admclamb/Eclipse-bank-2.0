@@ -1,6 +1,8 @@
 import MainCards from "../components/cards/MainCard";
 
-const Home = () => {
+const Home = (user) => {
+  console.log(user);
+
   return (
     <main className="pt-4 bg-light container">
       <section className="charts"></section>
