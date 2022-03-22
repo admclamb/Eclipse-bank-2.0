@@ -15,7 +15,6 @@ const Login = ({ user, setUser }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(username, password);
     try {
       const response = await readCustomer({ data: { username, password } });
       setUser(response.data);

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { createCustomer } from "../../utils/api";
 import ErrorAlert from "../errors/ErrorAlert";
@@ -15,6 +16,7 @@ const Signup = ({ setUser }) => {
   const [signupInfo, setSignupInfo] = useState(initSignupInfo);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [signupError, setSignupError] = useState({});
+  const history = useHistory();
   const handleChange = ({ target }) => {
     const { id } = target;
     setSignupInfo({
@@ -35,6 +37,7 @@ const Signup = ({ setUser }) => {
       setUser(response);
       setSignupInfo(initSignupInfo);
       setConfirmPassword("");
+      history.push("/createBankAccount");
     } catch (error) {
       setSignupError(error);
     }

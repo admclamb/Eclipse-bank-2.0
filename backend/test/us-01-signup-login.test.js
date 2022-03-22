@@ -1,8 +1,6 @@
 /**
  * User Story 01:
- * Allow users to login and display homepage information
- *
- *
+ * Allow users to sign up and log in
  * get customers/customer:id
  */
 const { expect } = require("chai");
