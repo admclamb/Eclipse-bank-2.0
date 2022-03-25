@@ -26,7 +26,6 @@ const Login = ({ user, setUser }) => {
     setPassword("");
     return;
   };
-  console.log(username, password);
   return (
     <div className="login d-flex flex-column align-items-center">
       <h2 className="mt-5">Eclipse Bank</h2>

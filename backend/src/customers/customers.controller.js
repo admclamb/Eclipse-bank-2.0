@@ -61,9 +61,7 @@ async function hashPassword(req, res, next) {
     const { password = "" } = data;
     const hash = await bcrypt.hash(password, SALT);
     if (hash) {
-      console.log("data: ", data);
       const dataCopy = { ...data, password: hash };
-      console.log("datacopy: ", dataCopy);
       res.locals.data = dataCopy;
       return next();
     } else {

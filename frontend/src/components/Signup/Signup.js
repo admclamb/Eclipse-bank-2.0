@@ -34,7 +34,7 @@ const Signup = ({ setUser }) => {
     }
     try {
       const response = await createCustomer({ data: signupInfo });
-      setUser(response);
+      setUser(response.data);
       setSignupInfo(initSignupInfo);
       setConfirmPassword("");
       history.push("/createBankAccount");

@@ -1,0 +1,22 @@
+[
+  {
+    "account_name": "Ricky Sanchez",
+    "balance": 50000,
+    "customer_ID": 1
+  },
+  {
+    "account_name": "Franks",
+    "balance": 10,
+    "customer_ID": 2
+  },
+  {
+    "account_name": "Tony Wiseman's",
+    "balance": 1000,
+    "customer_ID": 3
+  },
+  {
+    "account_name": "Jason's",
+    "balance": 2500,
+    "customer_ID": 4
+  }
+]

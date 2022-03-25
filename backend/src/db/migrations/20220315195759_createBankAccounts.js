@@ -6,6 +6,7 @@ exports.up = function (knex) {
   return knex.schema.createTable("bank_accounts", (table) => {
     table.increments("account_ID").primary();
     table.string("account_name");
+    table.integer("balance").defaultTo(0);
     table
       .integer("customer_ID")
       .references("customer_ID")

@@ -1,12 +1,26 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-const CreateBankAccount = () => {
-  const [accountName, setAccountName] = useState("");
+import { createBankAccount } from "../../utils/api";
+const CreateBankAccount = ({ user }) => {
+  console.log(user);
+  const [account_name, setAccount_name] = useState("");
+  const history = useHistory();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      const response = await createBankAccount({
+        account_name,
+        customer_ID: user.customer_ID,
+        balance: 0
+      });
+      console.log("bank account", response);
+    } catch (error) {
+      console.log(error);
+    }
+    history.push("/");
   };
-  console.log(accountName);
   return (
     <div className="login d-flex flex-column align-items-center">
       <h2 className="mt-5">Eclipse Bank</h2>
@@ -20,8 +34,8 @@ const CreateBankAccount = () => {
             className="form-control"
             id="username"
             type="text"
-            value={accountName}
-            onChange={({ target }) => setAccountName(target.value)}
+            value={account_name}
+            onChange={({ target }) => setAccount_name(target.value)}
           />
         </div>
 
