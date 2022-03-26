@@ -87,7 +87,8 @@ describe("US-01 - Create and list customers", () => {
         };
         const response = await request(app)
           .post("/customers")
-          .set("Accept", "application/json");
+          .set("Accept", "application/json")
+          .send({ data });
 
         expect(response.body.error).to.contain("lname");
         expect(response.status).to.equal(400);
@@ -102,7 +103,8 @@ describe("US-01 - Create and list customers", () => {
         };
         const response = await request(app)
           .post("/customers")
-          .set("Accept", "application/json");
+          .set("Accept", "application/json")
+          .send({ data });
 
         expect(response.body.error).to.contain("username");
         expect(response.status).to.equal(400);
