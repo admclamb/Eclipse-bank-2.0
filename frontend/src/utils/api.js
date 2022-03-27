@@ -22,6 +22,6 @@ export async function createCustomer(data, signal) {
 export async function createBankAccount(data, signal) {
   console.log(data);
   const url = new URL(`${API_BASE_URL}/bank_accounts`);
-  const response = await axios.post(url, { data: data }, headers);
-  return response.data;
+  const response = await axios.post(`${API_BASE_URL}/bank_accounts`, { data }, headers);
+  return response;
 }

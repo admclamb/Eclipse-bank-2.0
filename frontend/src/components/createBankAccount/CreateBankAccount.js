@@ -8,6 +8,7 @@ const CreateBankAccount = ({ user }) => {
   const history = useHistory();
 
   const handleSubmit = async (event) => {
+    console.log(account_name, user.customer_ID);
     try {
       event.preventDefault();
       const response = await createBankAccount({

@@ -8,7 +8,6 @@ const request = require("supertest");
 
 const app = require("../src/app");
 const knex = require("../src/db/connection");
-
 describe("US-01 - Create and list customers", () => {
   beforeAll(() => {
     return knex.migrate
@@ -59,12 +58,13 @@ describe("US-01 - Create and list customers", () => {
           .set("Accept", "application/json")
           .send({ datum: {} });
 
+        expect(response.body.error).toBeDefined();
         expect(response.status).to.equal(400);
       });
 
       test("returns  400 if first name is missing", async () => {
         const data = {
-          lname: "lastName",
+          last_name: "lastName",
           username: "username",
           email: "exampleemail@email.com",
           password: "4030ppcjlkja430",
@@ -74,13 +74,13 @@ describe("US-01 - Create and list customers", () => {
           .set("Accept", "application/json")
           .send({ data });
 
-        expect(response.body.error).to.contain("fname");
+        expect(response.body.error).to.contain("first_name");
         expect(response.status).to.equal(400);
       });
 
       test("returns 400 if last name is missing", async () => {
         const data = {
-          fname: "firstName",
+          first_name: "firstName",
           username: "username",
           email: "exampleemail@email.com",
           password: "4030ppcjlkja430",
@@ -90,14 +90,14 @@ describe("US-01 - Create and list customers", () => {
           .set("Accept", "application/json")
           .send({ data });
 
-        expect(response.body.error).to.contain("lname");
+        expect(response.body.error).to.contain("last_name");
         expect(response.status).to.equal(400);
       });
 
       test("returns 400 if username is missing", async () => {
         const data = {
-          fname: "firstName",
-          lname: "lastName",
+          first_name: "firstName",
+          last_name: "lastName",
           email: "exampleemail@email.com",
           password: "4030ppcjlkja430",
         };
@@ -112,8 +112,8 @@ describe("US-01 - Create and list customers", () => {
 
       test("returns 400 if email is missing", async () => {
         const data = {
-          fname: "firstName",
-          lname: "lastName",
+          first_name: "firstName",
+          last_name: "lastName",
           username: "username",
           password: "4030ppcjlkja430",
         };
@@ -127,8 +127,8 @@ describe("US-01 - Create and list customers", () => {
 
       test("returns 400 if password is missing", async () => {
         const data = {
-          fname: "firstName",
-          lname: "lastName",
+          first_name: "firstName",
+          last_name: "lastName",
           username: "username",
           email: "exampleemail@email.com",
         };

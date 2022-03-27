@@ -25,7 +25,6 @@ async function bankAccountExist(req, res, next) {
 
 function hasValidProperties(req, res, next) {
   const { data = {} } = req.body;
-  console.log(data);
   const invalidProperties = Object.keys(data).filter(
     (key) => !VALID_PROPERTIES.includes(key)
   );
@@ -40,11 +39,14 @@ function hasValidProperties(req, res, next) {
 }
 
 async function create(req, res, next) {
-  const { data = {} } = req.body;
-  console.log(data, "here");
-  const createdBankAccount = service.create(data);
-  createdBankAccount["balance"] = randomAmount();
-  res.status(201).json({ data: createdBankAccount });
+  try {
+    const { data = {} } = req.body;
+    data["balance"] = randomAmount();
+    const createdBankAccount = service.create(data);
+    res.status(201).json({ data: createdBankAccount });
+  } catch (error) {
+    next(error);
+  }
 }
 
 async function read(req, res, next) {
@@ -54,8 +56,8 @@ async function read(req, res, next) {
 
 module.exports = {
   create: [
-    hasValidProperties,
     hasRequiredProperties,
+    hasValidProperties,
     asyncErrorBoundary(create),
   ],
   read: [asyncErrorBoundary(bankAccountExist), read],
