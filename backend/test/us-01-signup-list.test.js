@@ -62,6 +62,13 @@ describe("US-01 - Create and list customers", () => {
         expect(response.status).to.equal(400);
       });
 
+      test("returns 400 if data value is empty", async () => {
+        const response = await request(app)
+          .post("/customers")
+          .set("Accept", "application/json")
+          .send({ data: {} });
+      });
+
       test("returns  400 if first name is missing", async () => {
         const data = {
           last_name: "lastName",
@@ -119,7 +126,8 @@ describe("US-01 - Create and list customers", () => {
         };
         const response = await request(app)
           .post("/customers")
-          .set("Accept", "application/json");
+          .set("Accept", "application/json")
+          .send({ data });
 
         expect(response.body.error).to.contain("email");
         expect(response.status).to.equal(400);
@@ -134,10 +142,33 @@ describe("US-01 - Create and list customers", () => {
         };
         const response = await request(app)
           .post("/customers")
-          .set("Accept", "application/json");
+          .set("Accept", "application/json")
+          .send({ data });
 
         expect(response.body.error).to.contain("password");
         expect(response.status).to.equal(400);
+      });
+
+      test("returns 201 if data is valid", async () => {
+        const data = {
+          first_name: "firstName",
+          last_name: "lastName",
+          username: "username",
+          email: "exampleEmail@email.com",
+        };
+        const response = await request(app)
+          .post("/customers")
+          .set("Accept", "application/json")
+          .send({ data });
+
+        expect(response.body.error).to.be.undefined();
+        expect(response.body.data).to.equal({
+          first_name: "firstName",
+          last_name: "lastName",
+          username: "username",
+          email: "exampleEmail@email.com",
+        });
+        expect(response.status).to.equal(201);
       });
     });
   });
