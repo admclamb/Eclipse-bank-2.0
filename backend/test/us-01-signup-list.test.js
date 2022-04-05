@@ -57,8 +57,6 @@ describe("US-01 - Create and list customers", () => {
           .post("/customers")
           .set("Accept", "application/json")
           .send({ datum: {} });
-
-        expect(response.body.error).toBeDefined();
         expect(response.status).to.equal(400);
       });
 
@@ -81,7 +79,7 @@ describe("US-01 - Create and list customers", () => {
           .set("Accept", "application/json")
           .send({ data });
 
-        expect(response.body.error).to.contain("first_name");
+        expect(response.body.error).to.include("first_name");
         expect(response.status).to.equal(400);
       });
 
@@ -97,7 +95,7 @@ describe("US-01 - Create and list customers", () => {
           .set("Accept", "application/json")
           .send({ data });
 
-        expect(response.body.error).to.contain("last_name");
+        expect(response.body.error).to.include("last_name");
         expect(response.status).to.equal(400);
       });
 
@@ -113,7 +111,7 @@ describe("US-01 - Create and list customers", () => {
           .set("Accept", "application/json")
           .send({ data });
 
-        expect(response.body.error).to.contain("username");
+        expect(response.body.error).to.include("username");
         expect(response.status).to.equal(400);
       });
 
@@ -129,7 +127,7 @@ describe("US-01 - Create and list customers", () => {
           .set("Accept", "application/json")
           .send({ data });
 
-        expect(response.body.error).to.contain("email");
+        expect(response.body.error).to.include("email");
         expect(response.status).to.equal(400);
       });
 
@@ -145,13 +143,14 @@ describe("US-01 - Create and list customers", () => {
           .set("Accept", "application/json")
           .send({ data });
 
-        expect(response.body.error).to.contain("password");
+        expect(response.body.error).to.include("password");
         expect(response.status).to.equal(400);
       });
 
       test("returns 201 if data is valid", async () => {
         const data = {
           first_name: "firstName",
+          password: "4030ppcjlkja430111",
           last_name: "lastName",
           username: "username",
           email: "exampleEmail@email.com",
@@ -161,8 +160,8 @@ describe("US-01 - Create and list customers", () => {
           .set("Accept", "application/json")
           .send({ data });
 
-        expect(response.body.error).to.be.undefined();
-        expect(response.body.data).to.equal({
+        expect(response.body.error).to.be.undefined;
+        expect(response.body.data).to.include({
           first_name: "firstName",
           last_name: "lastName",
           username: "username",

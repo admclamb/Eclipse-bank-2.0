@@ -67,7 +67,7 @@ async function hashPassword(req, res, next) {
     } else {
       next({
         status: 404,
-        message: "Error hasing password, please try again.",
+        message: "Error hashing password, please try again.",
       });
     }
   } catch (error) {
@@ -99,13 +99,9 @@ async function readLogin(req, res, next) {
 }
 
 async function create(req, res, next) {
-  try {
-    const { data } = res.locals;
-    const createdCustomer = await service.create(data);
-    res.status(201).json({ data: createdCustomer });
-  } catch (error) {
-    next(error);
-  }
+  const { data } = res.locals;
+  const createdCustomer = await service.create(data);
+  res.status(201).json({ data: createdCustomer });
 }
 
 async function list(req, res, next) {
