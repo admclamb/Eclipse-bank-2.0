@@ -67,7 +67,7 @@ describe("US-01 - Create and list customers", () => {
           .send({ data: {} });
       });
 
-      test("returns  400 if first name is missing", async () => {
+      test("returns 400 if first name is missing", async () => {
         const data = {
           last_name: "lastName",
           username: "username",
